@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "id": "item1",
+      "labels": ["Zwartkamdwergspanner"],
+      "images": ["images/zwartkam1.jpg", "images/zwartkam2.jpg", "images/zwartkam3.jpg"],
+      "level": 1
+    },
+    {
+      "id": "item2",
+      "labels": ["Voorjaarsdwergspanner"],
+      "images": ["images/voorjaars1.jpg", "images/voorjaars2.jpg"],
+      "level": 1
+    },
+    {
+      "id": "item3",
+      "labels": ["Eikendwergspanner"],
+      "images": ["images/eiken1.jpg", "images/eiken2.jpg", "images/eiken3.jpg"],
+      "level": 1
+    },
+    {
+      "id": "item4",
+      "labels": ["Fijnspardwergspanner"],
+      "images": ["images/fijnspar1.jpg", "images/fijnspar2.jpg"],
+      "level": 1
+    },
+    {
+      "id": "item5",
+      "labels": ["Gewone dwergspanner"],
+      "images": ["images/gewone1.jpg", "images/gewone2"],
+      "level": 1
+    },
+    {
+      "id": "item6",
+      "labels": ["Sinaasappel"],
+      "images": ["images/sinaasappel_1.jpg", "images/sinaasappel_2.jpg"],
+      "level": 2
+    },
+    {
+      "id": "item7",
+      "labels": ["Kiwi"],
+      "images": ["images/kiwi_1.jpg"],
+      "level": 2
+    },
+    // ... tot 30 items
+  ],
+  "levels": [
+    { "level": 1, "itemCount": 5 },
+    { "level": 2, "itemCount": 8 },
+    { "level": 3, "itemCount": 12 },
+    { "level": 4, "itemCount": 18 },
+    { "level": 5, "itemCount": 24 },
+    { "level": 6, "itemCount": 30 }
+  ]
+}
