@@ -118,7 +118,7 @@ button:hover {
     margin-bottom: 15px;
 }
 
-#options-container button {
+#quiz-container #options-container button {
     padding: 10px 20px; /* Neem de padding van de algemene button */
     border: none;        /* Neem de border van de algemene button */
     background-color: #007bff; /* Neem de achtergrondkleur van de algemene button */
