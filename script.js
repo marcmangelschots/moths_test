@@ -15,36 +15,32 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentQuestion = null;
     let userScore = 0;
 
-    // Functie om de JSON-data te laden
     async function loadData() {
         try {
             const response = await fetch('data.json');
             const data = await response.json();
             itemsData = data.items;
-            console.log("Items data geladen:", itemsData); // Debugging
-            displayLevelButtons(); // Roep displayLevelButtons zonder argumenten aan
+            console.log("Items data geladen:", itemsData);
+            displayLevelButtons();
         } catch (error) {
             console.error("Fout bij het laden van de data:", error);
             feedbackElement.textContent = "Er is een fout opgetreden bij het laden van de quizdata.";
         }
     }
 
-    // Functie om de niveauknoppen te selecteren en hover-informatie toe te voegen
     function displayLevelButtons() {
         const buttons = levelButtonsDiv.querySelectorAll('table button');
         buttons.forEach(button => {
             const itemsRange = button.dataset.items;
-            button.addEventListener('click', () => startQuiz(itemsRange));
+            button.addEventListener('click', () => {
+                console.log("startQuiz functie uitgevoerd"); // Debugging
+                startQuiz(itemsRange);
+            });
 
             const tooltip = document.createElement('div');
             tooltip.classList.add('tooltip');
-
             const [start, end] = itemsRange.split('-').map(Number);
-            const relevantItems = itemsData.filter(item => {
-                const itemNumber = parseInt(item.id.replace('item', ''));
-                return itemNumber >= start && itemNumber <= end;
-            });
-
+            const relevantItems = itemsData.filter(item => parseInt(item.id.replace('item', '')) >= start && parseInt(item.id.replace('item', '')) <= end);
             if (relevantItems.length > 0) {
                 const itemList = document.createElement('ul');
                 relevantItems.forEach(item => {
@@ -53,8 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     itemList.appendChild(listItem);
                 });
                 tooltip.appendChild(itemList);
-
-                // Voeg de tooltip toe aan de button-container (die we nu in de HTML hebben)
                 const buttonContainer = button.parentNode;
                 if (buttonContainer && buttonContainer.classList.contains('button-container')) {
                     buttonContainer.appendChild(tooltip);
@@ -63,15 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Functie om de quiz te starten op basis van het geselecteerde itembereik
     function startQuiz(itemsRange) {
         const [start, end] = itemsRange.split('-').map(Number);
-        currentLevelItems = itemsData.filter(item => {
-            const itemNumber = parseInt(item.id.replace('item', ''));
-            return itemNumber >= start && itemNumber <= end;
-        });
+        currentLevelItems = itemsData.filter(item => parseInt(item.id.replace('item', '')) >= start && parseInt(item.id.replace('item', '')) <= end);
 
-        console.log("Geselecteerde items voor quiz:", currentLevelItems); // Debugging
+        console.log("Geselecteerde items voor quiz:", currentLevelItems);
 
         if (currentLevelItems.length === 0) {
             feedbackElement.textContent = "Er zijn geen items beschikbaar voor dit bereik.";
@@ -80,16 +70,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         levelSelectionDiv.style.display = 'none';
         quizContainer.style.display = 'block';
+        console.log("Quiz container display:", quizContainer.style.display); // Debugging
         currentQuestionIndex = 0;
         userScore = 0;
+        console.log("loadQuestion functie uitgevoerd"); // Debugging
         loadQuestion();
     }
 
-    // Functie om een nieuwe vraag te laden (blijft grotendeels hetzelfde)
     function loadQuestion() {
-        console.log("Load question aangeroepen. Index:", currentQuestionIndex); // Debugging
-        console.log("Current level items:", currentLevelItems); // Debugging
-        if (currentQuestionIndex >= 10) { // Toon score na 10 vragen
+        console.log("Load question aangeroepen. Index:", currentQuestionIndex);
+        console.log("Current level items:", currentLevelItems);
+        if (currentQuestionIndex >= 10) {
             showScore();
             return;
         }
@@ -97,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const availableItems = [...currentLevelItems];
         const correctItem = availableItems[Math.floor(Math.random() * availableItems.length)];
         currentQuestion = correctItem;
-        console.log("Huidige vraag:", currentQuestion); // Debugging
+        console.log("Huidige vraag:", currentQuestion);
 
         if (currentQuestion && currentQuestion.images && currentQuestion.images.length > 0) {
             const randomImage = currentQuestion.images[Math.floor(Math.random() * currentQuestion.images.length)];
@@ -105,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
             quizImage.alt = currentQuestion.labels[0];
         } else {
             console.error("Geen afbeeldingen gevonden voor item:", currentQuestion);
-            quizImage.src = ''; // Stel een placeholder of foutafbeelding in indien nodig
+            quizImage.src = '';
             quizImage.alt = 'Geen afbeelding beschikbaar';
         }
 
@@ -116,11 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
         nextButton.style.display = 'none';
     }
 
-    // Functie om meerkeuze-opties te genereren (blijft grotendeels hetzelfde)
     function generateOptions(correctItem, availableItems) {
         const options = new Set();
         options.add(correctItem.labels[0]);
-
         while (options.size < 4 && availableItems.length > 1) {
             const randomIndex = Math.floor(Math.random() * availableItems.length);
             const randomItem = availableItems[randomIndex];
@@ -131,13 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 options.add(correctItem.labels[0]);
             }
         }
-
-        const shuffledOptions = shuffleArray(Array.from(options));
-        console.log("Generated options:", shuffledOptions); // Debugging
-        return shuffledOptions;
+        return shuffleArray(Array.from(options));
     }
 
-    // Functie om de opties op het scherm weer te geven (blijft grotendeels hetzelfde)
     function displayOptions(options) {
         optionsContainer.innerHTML = '';
         options.forEach(optionText => {
@@ -148,7 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Functie om het gegeven antwoord te controleren (blijft hetzelfde)
     function checkAnswer(selectedAnswer) {
         if (currentQuestion && currentQuestion.labels.includes(selectedAnswer)) {
             feedbackElement.textContent = 'Correct!';
@@ -163,16 +147,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Functie om de score te tonen na de quiz (blijft hetzelfde)
     function showScore() {
         quizContainer.style.display = 'none';
         feedbackElement.textContent = `Quiz voltooid! Je eindscore is: ${userScore} / 10`;
         scoreElement.textContent = '';
         nextButton.style.display = 'none';
-        levelSelectionDiv.style.display = 'block'; // Terug naar niveau selectie
+        levelSelectionDiv.style.display = 'block';
     }
 
-    // Functie om een array willekeurig te schudden (blijft hetzelfde)
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -181,7 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return array;
     }
 
-    // Event listener voor de "Volgende vraag" knop (blijft hetzelfde)
     nextButton.addEventListener('click', () => {
         currentQuestionIndex++;
         loadQuestion();
@@ -190,6 +171,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Laad de data wanneer de pagina geladen is
     loadData();
 });
