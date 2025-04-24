@@ -1,12 +1,12 @@
 body {
     font-family: sans-serif;
-    margin: 0; /* Verwijder standaard marges */
+    margin: 0;
     background-color: #f4f4f4;
     color: #333;
     display: flex;
-    justify-content: center; /* Centreer horizontaal */
-    align-items: center; /* Centreer verticaal */
-    min-height: 100vh; /* Zorg dat de body de hele viewport beslaat */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
 .container {
@@ -14,7 +14,7 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center; /* Centreer de titel */
+    text-align: center;
 }
 
 h1, h2 {
@@ -24,31 +24,26 @@ h1, h2 {
 
 #level-buttons {
     display: flex;
-    flex-direction: column; /* Stapel de rijen */
-    align-items: center; /* Centreer de rijen horizontaal */
+    flex-direction: column;
+    align-items: center;
     margin-top: 20px;
 }
 
-.button-row {
+#level-buttons p {
     display: flex;
-    gap: 10px; /* Ruimte tussen de knoppen in een rij */
-    margin-bottom: 10px; /* Ruimte tussen de rijen */
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px; /* Wat ruimte tussen de rijen van knoppen */
 }
 
-.button-row:nth-child(1) button {
-    flex-grow: 1; /* Verdeel ruimte gelijkmatig over de eerste rij */
+#level-buttons p:last-child {
+    margin-bottom: 0; /* Verwijder de marge onder de laatste rij knoppen */
 }
 
-.button-row:nth-child(2) {
-    /* Minder knoppen, dus minder ruimte nodig */
-    justify-content: center; /* Centreer de knoppen in de tweede rij */
-    /* voeg hier eventueel andere stijlen toe */
-}
-
-.button-row:nth-child(3) {
-    /* Nog minder knoppen */
-    justify-content: center; /* Centreer de knoppen in de derde rij */
-    /* voeg hier eventueel andere stijlen toe */
+#level-buttons p .button-container {
+    display: inline-block;
 }
 
 button {
@@ -108,7 +103,7 @@ button:hover {
 #quiz-container {
     display: none;
     margin-top: 20px;
-    text-align: center; /* Centreer quiz elementen */
+    text-align: center;
 }
 
 #quiz-image {
