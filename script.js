@@ -29,73 +29,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Functie om de niveauknoppen te tonen en hover-informatie toe te voegen
-    function displayLevelButtons() {
-        levelButtonsDiv.innerHTML = ''; // Leeg de bestaande knoppen
+// Functie om de niveauknoppen te selecteren en hover-informatie toe te voegen
+function displayLevelButtons() {
+    const buttons = levelButtonsDiv.querySelectorAll('table button');
+    buttons.forEach(button => {
+        const itemsRange = button.dataset.items;
+        button.addEventListener('click', () => startQuiz(itemsRange));
 
-        const createButton = (text, itemsRange) => {
-            const buttonContainer = document.createElement('div');
-            buttonContainer.classList.add('button-container');
+        const tooltip = document.createElement('div');
+        tooltip.classList.add('tooltip');
 
-            const button = document.createElement('button');
-            button.textContent = text;
-            button.dataset.items = itemsRange; // Stel de data-items in
-            button.addEventListener('click', () => startQuiz(itemsRange));
+        const [start, end] = itemsRange.split('-').map(Number);
+        const relevantItems = itemsData.filter(item => {
+            const itemNumber = parseInt(item.id.replace('item', ''));
+            return itemNumber >= start && itemNumber <= end;
+        });
 
-            const tooltip = document.createElement('div');
-            tooltip.classList.add('tooltip');
-
-            const [start, end] = itemsRange.split('-').map(Number);
-            const relevantItems = itemsData.filter(item => {
-                const itemNumber = parseInt(item.id.replace('item', ''));
-                return itemNumber >= start && itemNumber <= end;
+        if (relevantItems.length > 0) {
+            const itemList = document.createElement('ul');
+            relevantItems.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = item.labels[0];
+                itemList.appendChild(listItem);
             });
+            tooltip.appendChild(itemList);
 
-            if (relevantItems.length > 0) {
-                const itemList = document.createElement('ul');
-                relevantItems.forEach(item => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = item.labels[0];
-                    itemList.appendChild(listItem);
-                });
-                tooltip.appendChild(itemList);
+            // Voeg de tooltip toe aan de button-container (die we nu in de HTML hebben)
+            const buttonContainer = button.parentNode;
+            if (buttonContainer && buttonContainer.classList.contains('button-container')) {
                 buttonContainer.appendChild(tooltip);
             }
-
-            buttonContainer.appendChild(button);
-            levelButtonsDiv.appendChild(buttonContainer);
-        };
-
-        // Eerste kolom
-        const column1 = document.createElement('div');
-        column1.classList.add('button-column');
-        createButton("Motjes 1 - 5", "1-5");
-        createButton("Motjes 6 - 10", "6-10");
-        createButton("Motjes 11 - 15", "11-15");
-        createButton("Motjes 16 - 20", "16-20");
-        createButton("Motjes 21 - 25", "21-25");
-        createButton("Motjes 26 - 30", "26-30");
-        column1.querySelectorAll('.button-container').forEach(bc => levelButtonsDiv.appendChild(bc));
-
-        // Tweede kolom
-        const column2 = document.createElement('div');
-        column2.classList.add('button-column');
-        createButton("Motjes 1 - 10", "1-10");
-        createButton("Motjes 6 - 15", "6-15");
-        createButton("Motjes 16 - 25", "16-25");
-        createButton("Motjes 21 - 30", "21-30");
-        column2.querySelectorAll('.button-container').forEach(bc => levelButtonsDiv.appendChild(bc));
-
-        // Derde rij
-        const row3 = document.createElement('div');
-        row3.classList.add('button-row');
-        createButton("Motjes 1 - 15", "1-15");
-        createButton("Motjes 16 - 30", "16-30");
-        row3.querySelectorAll('.button-container').forEach(bc => levelButtonsDiv.appendChild(bc));
-
-        levelButtonsDiv.appendChild(column1);
-        levelButtonsDiv.appendChild(column2);
-        levelButtonsDiv.appendChild(row3);
-    }
+        }
+    });
+}
 
     // Functie om de quiz te starten op basis van het geselecteerde itembereik
     function startQuiz(itemsRange) {
