@@ -39,10 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Functie om de quiz te starten voor een geselecteerd niveau
+// Functie om de quiz te starten voor een geselecteerd niveau
     function startQuiz(level) {
         currentLevel = level;
-        currentLevelItems = itemsData.filter(item => item.level <= currentLevel);
+        currentLevelItems = itemsData.filter(item => item.level === currentLevel); // Alleen items van het geselecteerde niveau
         if (currentLevelItems.length === 0) {
             feedbackElement.textContent = "Er zijn nog geen items beschikbaar voor dit niveau.";
             return;
@@ -135,15 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nextButton.style.display = 'none';
         levelSelectionDiv.style.display = 'block'; // Terug naar niveau selectie (of implementeer automatische doorstroming)
 
-        // Optioneel: Automatisch doorschakelen naar volgend niveau
-        if (userScore / 10 >= 0.8 && currentLevel < 6) {
-            currentLevel++;
-            startQuiz(currentLevel);
-        } else if (currentLevel === 6) {
-            feedbackElement.textContent += " Je hebt alle items geleerd!";
-        } else if (userScore / 10 < 0.8) {
-            feedbackElement.textContent += " Probeer dit niveau nog eens of kies een ander niveau.";
-        }
+        
     }
 
     // Functie om een array willekeurig te schudden (Fisher-Yates algoritme)
