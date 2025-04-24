@@ -42,8 +42,7 @@
       "images": ["images/kiwi_1.jpg"],
       "level": 2
     },
-    // ... tot 30 items
-  ],
+    ],
   "levels": [
     { "level": 1, "itemCount": 5 },
     { "level": 2, "itemCount": 8 },
