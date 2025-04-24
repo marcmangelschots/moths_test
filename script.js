@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextButton = document.getElementById('next-question');
 
     let itemsData = [];
-    let currentLevel = null;
     let currentLevelItems = [];
     let currentQuestionIndex = 0;
     let currentQuestion = null;
@@ -19,34 +18,98 @@ document.addEventListener('DOMContentLoaded', () => {
     // Functie om de JSON-data te laden
     async function loadData() {
         try {
-            const response = await fetch('data.json'); // Zorg ervoor dat 'data.json' in dezelfde map staat of pas het pad aan
+            const response = await fetch('data.json');
             const data = await response.json();
             itemsData = data.items;
-            displayLevelButtons(data.levels);
+            displayLevelButtons(); // Roep displayLevelButtons zonder argumenten aan
         } catch (error) {
             console.error("Fout bij het laden van de data:", error);
             feedbackElement.textContent = "Er is een fout opgetreden bij het laden van de quizdata.";
         }
     }
 
-    // Functie om de niveauknoppen te tonen
-    function displayLevelButtons(levels) {
-        levels.forEach(levelInfo => {
+    // Functie om de niveauknoppen te tonen en hover-informatie toe te voegen
+    function displayLevelButtons() {
+        levelButtonsDiv.innerHTML = ''; // Leeg de bestaande knoppen
+
+        const createButton = (text, itemsRange) => {
+            const buttonContainer = document.createElement('div');
+            buttonContainer.classList.add('button-container');
+
             const button = document.createElement('button');
-            button.textContent = `Niveau ${levelInfo.level} (${levelInfo.itemCount} items)`;
-            button.addEventListener('click', () => startQuiz(levelInfo.level));
-            levelButtonsDiv.appendChild(button);
-        });
+            button.textContent = text;
+            button.dataset.items = itemsRange; // Stel de data-items in
+            button.addEventListener('click', () => startQuiz(itemsRange));
+
+            const tooltip = document.createElement('div');
+            tooltip.classList.add('tooltip');
+
+            const [start, end] = itemsRange.split('-').map(Number);
+            const relevantItems = itemsData.filter(item => {
+                const itemNumber = parseInt(item.id.replace('item', ''));
+                return itemNumber >= start && itemNumber <= end;
+            });
+
+            if (relevantItems.length > 0) {
+                const itemList = document.createElement('ul');
+                relevantItems.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = item.labels[0];
+                    itemList.appendChild(listItem);
+                });
+                tooltip.appendChild(itemList);
+                buttonContainer.appendChild(tooltip);
+            }
+
+            buttonContainer.appendChild(button);
+            levelButtonsDiv.appendChild(buttonContainer);
+        };
+
+        // Eerste kolom
+        const column1 = document.createElement('div');
+        column1.classList.add('button-column');
+        createButton("Motjes 1 - 5", "1-5");
+        createButton("Motjes 6 - 10", "6-10");
+        createButton("Motjes 11 - 15", "11-15");
+        createButton("Motjes 16 - 20", "16-20");
+        createButton("Motjes 21 - 25", "21-25");
+        createButton("Motjes 26 - 30", "26-30");
+        column1.querySelectorAll('.button-container').forEach(bc => levelButtonsDiv.appendChild(bc));
+
+        // Tweede kolom
+        const column2 = document.createElement('div');
+        column2.classList.add('button-column');
+        createButton("Motjes 1 - 10", "1-10");
+        createButton("Motjes 6 - 15", "6-15");
+        createButton("Motjes 16 - 25", "16-25");
+        createButton("Motjes 21 - 30", "21-30");
+        column2.querySelectorAll('.button-container').forEach(bc => levelButtonsDiv.appendChild(bc));
+
+        // Derde rij
+        const row3 = document.createElement('div');
+        row3.classList.add('button-row');
+        createButton("Motjes 1 - 15", "1-15");
+        createButton("Motjes 16 - 30", "16-30");
+        row3.querySelectorAll('.button-container').forEach(bc => levelButtonsDiv.appendChild(bc));
+
+        levelButtonsDiv.appendChild(column1);
+        levelButtonsDiv.appendChild(column2);
+        levelButtonsDiv.appendChild(row3);
     }
 
-// Functie om de quiz te starten voor een geselecteerd niveau
-    function startQuiz(level) {
-        currentLevel = level;
-        currentLevelItems = itemsData.filter(item => item.level === currentLevel); // Alleen items van het geselecteerde niveau
+    // Functie om de quiz te starten op basis van het geselecteerde itembereik
+    function startQuiz(itemsRange) {
+        const [start, end] = itemsRange.split('-').map(Number);
+        currentLevelItems = itemsData.filter(item => {
+            const itemNumber = parseInt(item.id.replace('item', ''));
+            return itemNumber >= start && itemNumber <= end;
+        });
+
         if (currentLevelItems.length === 0) {
-            feedbackElement.textContent = "Er zijn nog geen items beschikbaar voor dit niveau.";
+            feedbackElement.textContent = "Er zijn geen items beschikbaar voor dit bereik.";
             return;
         }
+
         levelSelectionDiv.style.display = 'none';
         quizContainer.style.display = 'block';
         currentQuestionIndex = 0;
@@ -54,55 +117,50 @@ document.addEventListener('DOMContentLoaded', () => {
         loadQuestion();
     }
 
-    // Functie om een nieuwe vraag te laden
+    // Functie om een nieuwe vraag te laden (blijft grotendeels hetzelfde)
     function loadQuestion() {
         if (currentQuestionIndex >= 10) { // Toon score na 10 vragen
             showScore();
             return;
         }
 
-        // Selecteer willekeurige items voor de huidige vraag en opties (alleen uit het huidige niveau)
-        const availableItems = [...currentLevelItems]; // Maak een kopie om manipulatie te voorkomen
+        const availableItems = [...currentLevelItems];
         const correctItem = availableItems[Math.floor(Math.random() * availableItems.length)];
         currentQuestion = correctItem;
 
-        // Kies een willekeurige afbeelding van het correcte item
         const randomImage = correctItem.images[Math.floor(Math.random() * correctItem.images.length)];
         quizImage.src = randomImage;
-        quizImage.alt = correctItem.labels[0]; // Gebruik het eerste label als alt-tekst
+        quizImage.alt = correctItem.labels[0];
 
-        // Genereer willekeurige opties (inclusief het correcte antwoord)
         const options = generateOptions(correctItem, availableItems);
         displayOptions(options);
 
-        feedbackElement.textContent = ''; // Reset feedback
+        feedbackElement.textContent = '';
         nextButton.style.display = 'none';
     }
 
-    // Functie om meerkeuze-opties te genereren
+    // Functie om meerkeuze-opties te genereren (blijft grotendeels hetzelfde)
     function generateOptions(correctItem, availableItems) {
         const options = new Set();
-        options.add(correctItem.labels[0]); // Voeg het correcte antwoord toe
+        options.add(correctItem.labels[0]);
 
-        while (options.size < 4 && availableItems.length > 1) { // Genereer 3 willekeurige, incorrecte opties
+        while (options.size < 4 && availableItems.length > 1) {
             const randomIndex = Math.floor(Math.random() * availableItems.length);
             const randomItem = availableItems[randomIndex];
             if (randomItem.id !== correctItem.id) {
                 options.add(randomItem.labels[0]);
             }
             if (options.size < 4 && availableItems.length <= 1) {
-                // Als er niet genoeg unieke incorrecte opties zijn, vul aan met het correcte antwoord (kan gebeuren in de vroege levels)
                 options.add(correctItem.labels[0]);
             }
         }
 
-        // Zet de Set om naar een array en schud de volgorde
         return shuffleArray(Array.from(options));
     }
 
-    // Functie om de opties op het scherm weer te geven
+    // Functie om de opties op het scherm weer te geven (blijft grotendeels hetzelfde)
     function displayOptions(options) {
-        optionsContainer.innerHTML = ''; // Leeg de vorige opties
+        optionsContainer.innerHTML = '';
         options.forEach(optionText => {
             const button = document.createElement('button');
             button.textContent = optionText;
@@ -111,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Functie om het gegeven antwoord te controleren
+    // Functie om het gegeven antwoord te controleren (blijft hetzelfde)
     function checkAnswer(selectedAnswer) {
         if (currentQuestion && currentQuestion.labels.includes(selectedAnswer)) {
             feedbackElement.textContent = 'Correct!';
@@ -121,24 +179,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         scoreElement.textContent = `Score: ${userScore} / ${currentQuestionIndex + 1}`;
         nextButton.style.display = 'inline-block';
-        // Disable answer buttons after answering
         Array.from(optionsContainer.children).forEach(button => {
             button.disabled = true;
         });
     }
 
-    // Functie om de score te tonen na de quiz
+    // Functie om de score te tonen na de quiz (blijft hetzelfde)
     function showScore() {
         quizContainer.style.display = 'none';
         feedbackElement.textContent = `Quiz voltooid! Je eindscore is: ${userScore} / 10`;
         scoreElement.textContent = '';
         nextButton.style.display = 'none';
-        levelSelectionDiv.style.display = 'block'; // Terug naar niveau selectie (of implementeer automatische doorstroming)
-
-        
+        levelSelectionDiv.style.display = 'block'; // Terug naar niveau selectie
     }
 
-    // Functie om een array willekeurig te schudden (Fisher-Yates algoritme)
+    // Functie om een array willekeurig te schudden (blijft hetzelfde)
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -147,11 +202,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return array;
     }
 
-    // Event listener voor de "Volgende vraag" knop
+    // Event listener voor de "Volgende vraag" knop (blijft hetzelfde)
     nextButton.addEventListener('click', () => {
         currentQuestionIndex++;
         loadQuestion();
-        // Enable answer buttons for the next question
         Array.from(optionsContainer.children).forEach(button => {
             button.disabled = false;
         });

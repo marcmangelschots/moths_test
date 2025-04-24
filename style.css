@@ -1,106 +1,87 @@
-body {
-    font-family: sans-serif;
-    margin: 20px;
-    background-color: #f4f4f4;
-    color: #333;
+#level-buttons {
+    display: flex;
+    flex-direction: column; /* Standaard onder elkaar */
+    align-items: center; /* Centreer de kolommen in bredere weergaven */
 }
 
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-h1, h2 {
-    color: #007bff;
-    margin-bottom: 15px;
-}
-
-#level-selection {
-    margin-bottom: 20px;
-}
-
-#level-buttons button {
-    padding: 10px 20px;
-    margin: 5px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-#level-buttons button:hover {
-    background-color: #0056b3;
-}
-
-#quiz-container {
-    display: none; /* Initially hidden */
-    margin-top: 20px;
-}
-
-#quiz-image {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-#options-container button {
-    display: block;
-    width: 100%;
-    padding: 10px;
+.button-column {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    background-color: #eee;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+    align-items: stretch; /* Zorg dat knoppen kolom vullen */
+}
+
+.button-column button {
+    margin: 5px 0;
+}
+
+.button-row {
+    display: flex;
+    margin-top: 20px;
+    align-items: stretch; /* Zorg dat knoppen rij vullen */
+}
+
+.button-row button {
+    flex-grow: 1; /* Verdeel de ruimte gelijkmatig */
+    margin: 0 5px;
+}
+
+/* Pas aan voor bredere schermen om kolommen naast elkaar te zetten */
+@media (min-width: 600px) {
+    #level-buttons {
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .button-column {
+        margin-bottom: 0;
+    }
+
+    .button-row {
+        margin-top: 20px;
+        justify-content: center;
+        width: 100%; /* Zorg dat de rij de breedte van de container inneemt */
+    }
+}
+
+/* Stijl voor de hover tooltip */
+.button-container {
+    position: relative; /* Nodig voor absolute positionering van de tooltip */
+    display: inline-block; /* Zodat de container de grootte van de knop aanneemt */
+}
+
+.tooltip {
+    visibility: hidden;
+    width: max-content;
+    background-color: #333;
+    color: #fff;
     text-align: left;
-    transition: background-color 0.3s ease;
-}
-
-#options-container button:hover {
-    background-color: #ddd;
-}
-
-#options-container button:disabled {
-    background-color: #f9f9f9;
-    color: #999;
-    border-color: #eee;
-    cursor: not-allowed;
-}
-
-#submit-answer, #next-question {
-    padding: 10px 20px;
-    margin-top: 15px;
-    border: none;
-    background-color: #28a745;
-    color: white;
     border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Boven de knop plaatsen */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    white-space: nowrap; /* Voorkom dat de tekst ombreekt */
 }
 
-#submit-answer:hover, #next-question:hover {
-    background-color: #1e7e34;
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
 }
 
-#feedback {
-    margin-top: 15px;
-    font-weight: bold;
-    color: #17a2b8;
-}
-
-#score {
-    margin-top: 10px;
-    font-size: 1.1em;
+button:hover + .tooltip, .button-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
 }
