@@ -41,7 +41,7 @@
       "labels": ["Kiwi"],
       "images": ["images/kiwi_1.jpg"],
       "level": 2
-    },
+    }
     ],
   "levels": [
     { "level": 1, "itemCount": 5 },
