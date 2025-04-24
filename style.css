@@ -24,26 +24,23 @@ h1, h2 {
 
 #level-buttons {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     margin-top: 20px;
 }
 
-#level-buttons p {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px; /* Wat ruimte tussen de rijen van knoppen */
+#level-buttons table {
+    border-collapse: collapse; /* Geen dubbele randen tussen cellen */
+    margin-bottom: 20px; /* Wat ruimte onder de tabel */
 }
 
-#level-buttons p:last-child {
-    margin-bottom: 0; /* Verwijder de marge onder de laatste rij knoppen */
+#level-buttons table td {
+    padding: 5px; /* Wat ruimte rond de knoppen in de cellen */
+    text-align: center; /* Centreer de inhoud (de button-container) in de cel */
 }
 
-#level-buttons p .button-container {
-    display: inline-block;
+#level-buttons table td .button-container {
+    display: inline-block; /* Voor de tooltip positionering */
 }
 
 button {
