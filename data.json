@@ -27,7 +27,7 @@
     {
       "id": "item5",
       "labels": ["Gewone dwergspanner"],
-      "images": ["images/gewone1.jpg", "images/gewone2"],
+      "images": ["images/gewone1.jpg", "images/gewone2.jpg"],
       "level": 1
     },
     {
