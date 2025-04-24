@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('data.json');
             const data = await response.json();
             itemsData = data.items;
+            console.log("Items data geladen:", itemsData); // Debugging
             displayLevelButtons(); // Roep displayLevelButtons zonder argumenten aan
         } catch (error) {
             console.error("Fout bij het laden van de data:", error);
@@ -28,40 +29,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Functie om de niveauknoppen te tonen en hover-informatie toe te voegen
-// Functie om de niveauknoppen te selecteren en hover-informatie toe te voegen
-function displayLevelButtons() {
-    const buttons = levelButtonsDiv.querySelectorAll('table button');
-    buttons.forEach(button => {
-        const itemsRange = button.dataset.items;
-        button.addEventListener('click', () => startQuiz(itemsRange));
+    // Functie om de niveauknoppen te selecteren en hover-informatie toe te voegen
+    function displayLevelButtons() {
+        const buttons = levelButtonsDiv.querySelectorAll('table button');
+        buttons.forEach(button => {
+            const itemsRange = button.dataset.items;
+            button.addEventListener('click', () => startQuiz(itemsRange));
 
-        const tooltip = document.createElement('div');
-        tooltip.classList.add('tooltip');
+            const tooltip = document.createElement('div');
+            tooltip.classList.add('tooltip');
 
-        const [start, end] = itemsRange.split('-').map(Number);
-        const relevantItems = itemsData.filter(item => {
-            const itemNumber = parseInt(item.id.replace('item', ''));
-            return itemNumber >= start && itemNumber <= end;
-        });
-
-        if (relevantItems.length > 0) {
-            const itemList = document.createElement('ul');
-            relevantItems.forEach(item => {
-                const listItem = document.createElement('li');
-                listItem.textContent = item.labels[0];
-                itemList.appendChild(listItem);
+            const [start, end] = itemsRange.split('-').map(Number);
+            const relevantItems = itemsData.filter(item => {
+                const itemNumber = parseInt(item.id.replace('item', ''));
+                return itemNumber >= start && itemNumber <= end;
             });
-            tooltip.appendChild(itemList);
 
-            // Voeg de tooltip toe aan de button-container (die we nu in de HTML hebben)
-            const buttonContainer = button.parentNode;
-            if (buttonContainer && buttonContainer.classList.contains('button-container')) {
-                buttonContainer.appendChild(tooltip);
+            if (relevantItems.length > 0) {
+                const itemList = document.createElement('ul');
+                relevantItems.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = item.labels[0];
+                    itemList.appendChild(listItem);
+                });
+                tooltip.appendChild(itemList);
+
+                // Voeg de tooltip toe aan de button-container (die we nu in de HTML hebben)
+                const buttonContainer = button.parentNode;
+                if (buttonContainer && buttonContainer.classList.contains('button-container')) {
+                    buttonContainer.appendChild(tooltip);
+                }
             }
-        }
-    });
-}
+        });
+    }
 
     // Functie om de quiz te starten op basis van het geselecteerde itembereik
     function startQuiz(itemsRange) {
@@ -70,6 +70,8 @@ function displayLevelButtons() {
             const itemNumber = parseInt(item.id.replace('item', ''));
             return itemNumber >= start && itemNumber <= end;
         });
+
+        console.log("Geselecteerde items voor quiz:", currentLevelItems); // Debugging
 
         if (currentLevelItems.length === 0) {
             feedbackElement.textContent = "Er zijn geen items beschikbaar voor dit bereik.";
@@ -85,6 +87,8 @@ function displayLevelButtons() {
 
     // Functie om een nieuwe vraag te laden (blijft grotendeels hetzelfde)
     function loadQuestion() {
+        console.log("Load question aangeroepen. Index:", currentQuestionIndex); // Debugging
+        console.log("Current level items:", currentLevelItems); // Debugging
         if (currentQuestionIndex >= 10) { // Toon score na 10 vragen
             showScore();
             return;
@@ -93,10 +97,17 @@ function displayLevelButtons() {
         const availableItems = [...currentLevelItems];
         const correctItem = availableItems[Math.floor(Math.random() * availableItems.length)];
         currentQuestion = correctItem;
+        console.log("Huidige vraag:", currentQuestion); // Debugging
 
-        const randomImage = correctItem.images[Math.floor(Math.random() * correctItem.images.length)];
-        quizImage.src = randomImage;
-        quizImage.alt = correctItem.labels[0];
+        if (currentQuestion && currentQuestion.images && currentQuestion.images.length > 0) {
+            const randomImage = currentQuestion.images[Math.floor(Math.random() * currentQuestion.images.length)];
+            quizImage.src = randomImage;
+            quizImage.alt = currentQuestion.labels[0];
+        } else {
+            console.error("Geen afbeeldingen gevonden voor item:", currentQuestion);
+            quizImage.src = ''; // Stel een placeholder of foutafbeelding in indien nodig
+            quizImage.alt = 'Geen afbeelding beschikbaar';
+        }
 
         const options = generateOptions(correctItem, availableItems);
         displayOptions(options);
@@ -121,7 +132,9 @@ function displayLevelButtons() {
             }
         }
 
-        return shuffleArray(Array.from(options));
+        const shuffledOptions = shuffleArray(Array.from(options));
+        console.log("Generated options:", shuffledOptions); // Debugging
+        return shuffledOptions;
     }
 
     // Functie om de opties op het scherm weer te geven (blijft grotendeels hetzelfde)
