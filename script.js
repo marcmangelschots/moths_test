@@ -80,29 +80,37 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadQuestion() {
         console.log("Load question aangeroepen. Index:", currentQuestionIndex);
         console.log("Current level items:", currentLevelItems);
+        console.log("Net voor instellen afbeelding:", currentQuestion);
+    
         if (currentQuestionIndex >= 10) {
             showScore();
             return;
         }
-
+    
         const availableItems = [...currentLevelItems];
         const correctItem = availableItems[Math.floor(Math.random() * availableItems.length)];
         currentQuestion = correctItem;
         console.log("Huidige vraag:", currentQuestion);
-
+    
+        if (currentQuestion) console.log("currentQuestion is truthy");
+        if (currentQuestion && currentQuestion.images) console.log("currentQuestion.images is truthy");
         if (currentQuestion && currentQuestion.images && currentQuestion.images.length > 0) {
+            console.log("currentQuestion.images.length > 0 is true");
             const randomImage = currentQuestion.images[Math.floor(Math.random() * currentQuestion.images.length)];
             quizImage.src = randomImage;
+            console.log("quizImage.src na instellen:", quizImage.src);
             quizImage.alt = currentQuestion.labels[0];
         } else {
+            console.log("Conditie voor afbeelding is false");
             console.error("Geen afbeeldingen gevonden voor item:", currentQuestion);
             quizImage.src = '';
             quizImage.alt = 'Geen afbeelding beschikbaar';
         }
-
+    
         const options = generateOptions(correctItem, availableItems);
+        console.log("displayOptions functie uitgevoerd met opties:", options);
         displayOptions(options);
-
+    
         feedbackElement.textContent = '';
         nextButton.style.display = 'none';
     }
