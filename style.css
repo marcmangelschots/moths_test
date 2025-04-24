@@ -119,15 +119,19 @@ button:hover {
 }
 
 #options-container button {
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    background-color: #eee;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    text-align: left;
-    transition: background-color 0.3s ease;
+    padding: 10px 20px; /* Neem de padding van de algemene button */
+    border: none;        /* Neem de border van de algemene button */
+    background-color: #007bff; /* Neem de achtergrondkleur van de algemene button */
+    color: white;        /* Deze werd al goed toegepast */
+    border-radius: 5px;   /* Neem de border-radius van de algemene button */
+    cursor: pointer;     /* Neem de cursor van de algemene button */
+    font-size: 16px;      /* Neem de lettergrootte van de algemene button */
+    transition: background-color 0.3s ease; /* Neem de transitie van de algemene button */
+    margin: 5px 0;       /* Behoud deze marge */
+    text-align: left;    /* Behoud deze uitlijning */
+    display: block;       /* Forceer de knoppen onder elkaar (full width) */
+    width: 100%;         /* Zorg dat ze de volledige breedte van de container innemen */
+    box-sizing: border-box; /* Zorg ervoor dat padding en border bij de breedte worden inbegrepen */
 }
 
 #options-container button:hover {
