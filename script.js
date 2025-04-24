@@ -80,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadQuestion() {
         console.log("Load question aangeroepen. Index:", currentQuestionIndex);
         console.log("Current level items:", currentLevelItems);
-        console.log("Net voor instellen afbeelding:", currentQuestion);
     
         if (currentQuestionIndex >= 10) {
             showScore();
@@ -89,8 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
         const availableItems = [...currentLevelItems];
         const correctItem = availableItems[Math.floor(Math.random() * availableItems.length)];
-        currentQuestion = correctItem;
+        currentQuestion = correctItem; // Zorg ervoor dat currentQuestion hier als eerste wordt ingesteld
         console.log("Huidige vraag:", currentQuestion);
+        console.log("Net voor instellen afbeelding:", currentQuestion);
     
         if (currentQuestion) console.log("currentQuestion is truthy");
         if (currentQuestion && currentQuestion.images) console.log("currentQuestion.images is truthy");
