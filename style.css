@@ -41,10 +41,14 @@ h1, h2 {
 
 .button-row:nth-child(2) {
     /* Minder knoppen, dus minder ruimte nodig */
+    justify-content: center; /* Centreer de knoppen in de tweede rij */
+    /* voeg hier eventueel andere stijlen toe */
 }
 
 .button-row:nth-child(3) {
     /* Nog minder knoppen */
+    justify-content: center; /* Centreer de knoppen in de derde rij */
+    /* voeg hier eventueel andere stijlen toe */
 }
 
 button {
