@@ -1,55 +1,70 @@
+body {
+    font-family: sans-serif;
+    margin: 0; /* Verwijder standaard marges */
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center; /* Centreer horizontaal */
+    align-items: center; /* Centreer verticaal */
+    min-height: 100vh; /* Zorg dat de body de hele viewport beslaat */
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centreer de titel */
+}
+
+h1, h2 {
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
 #level-buttons {
     display: flex;
-    flex-direction: column; /* Standaard onder elkaar */
-    align-items: center; /* Centreer de kolommen in bredere weergaven */
-}
-
-.button-column {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    align-items: stretch; /* Zorg dat knoppen kolom vullen */
-}
-
-.button-column button {
-    margin: 5px 0;
+    flex-direction: column; /* Stapel de rijen */
+    align-items: center; /* Centreer de rijen horizontaal */
+    margin-top: 20px;
 }
 
 .button-row {
     display: flex;
-    margin-top: 20px;
-    align-items: stretch; /* Zorg dat knoppen rij vullen */
+    gap: 10px; /* Ruimte tussen de knoppen in een rij */
+    margin-bottom: 10px; /* Ruimte tussen de rijen */
 }
 
-.button-row button {
-    flex-grow: 1; /* Verdeel de ruimte gelijkmatig */
-    margin: 0 5px;
+.button-row:nth-child(1) button {
+    flex-grow: 1; /* Verdeel ruimte gelijkmatig over de eerste rij */
 }
 
-/* Pas aan voor bredere schermen om kolommen naast elkaar te zetten */
-@media (min-width: 600px) {
-    #level-buttons {
-        flex-direction: row;
-        justify-content: center;
-        gap: 20px;
-        align-items: flex-start;
-    }
-
-    .button-column {
-        margin-bottom: 0;
-    }
-
-    .button-row {
-        margin-top: 20px;
-        justify-content: center;
-        width: 100%; /* Zorg dat de rij de breedte van de container inneemt */
-    }
+.button-row:nth-child(2) {
+    /* Minder knoppen, dus minder ruimte nodig */
 }
 
-/* Stijl voor de hover tooltip */
+.button-row:nth-child(3) {
+    /* Nog minder knoppen */
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
 .button-container {
-    position: relative; /* Nodig voor absolute positionering van de tooltip */
-    display: inline-block; /* Zodat de container de grootte van de knop aanneemt */
+    position: relative;
+    display: inline-block;
 }
 
 .tooltip {
@@ -62,12 +77,12 @@
     padding: 8px;
     position: absolute;
     z-index: 1;
-    bottom: 125%; /* Boven de knop plaatsen */
+    bottom: 125%;
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    white-space: nowrap; /* Voorkom dat de tekst ombreekt */
+    white-space: nowrap;
 }
 
 .tooltip::after {
@@ -81,7 +96,71 @@
     border-color: #333 transparent transparent transparent;
 }
 
-button:hover + .tooltip, .button-container:hover .tooltip {
+.button-container:hover .tooltip {
     visibility: visible;
     opacity: 1;
+}
+
+#quiz-container {
+    display: none;
+    margin-top: 20px;
+    text-align: center; /* Centreer quiz elementen */
+}
+
+#quiz-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#options-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 15px;
+}
+
+#options-container button {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+#options-container button:hover {
+    background-color: #ddd;
+}
+
+#submit-answer, #next-question {
+    padding: 10px 20px;
+    margin-top: 15px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#submit-answer:hover, #next-question:hover {
+    background-color: #1e7e34;
+}
+
+#feedback {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #17a2b8;
+}
+
+#score {
+    margin-top: 10px;
+    font-size: 1.1em;
 }
