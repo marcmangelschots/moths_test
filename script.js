@@ -163,12 +163,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showScore() {
-        quizContainer.style.display = 'none';
+        quizContainer.style.display = 'block'; // Zorg ervoor dat de quiz container zichtbaar is
+        quizImage.style.display = 'none';       // Verberg de afbeelding
+        optionsContainer.innerHTML = '';      // Leeg de opties
         feedbackElement.textContent = `Quiz voltooid! Uw eindscore is: ${userScore} / 10`;
         scoreElement.textContent = '';
-        nextButton.style.display = 'none'; // Verberg de "Volgende vraag" knop
-    
-        // Maak een nieuwe knop om terug te gaan naar het startscherm
+        nextButton.style.display = 'none';
+
         const restartButton = document.createElement('button');
         restartButton.textContent = 'Terug naar startscherm';
         restartButton.addEventListener('click', () => {
@@ -178,9 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
             userScore = 0;
             feedbackElement.textContent = '';
             scoreElement.textContent = '';
+            quizImage.style.display = 'block'; // Toon de afbeelding container weer voor de volgende quiz
         });
-    
-        // Voeg de knop toe aan de quiz container
         quizContainer.appendChild(restartButton);
     }
 
