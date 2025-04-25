@@ -164,10 +164,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showScore() {
         quizContainer.style.display = 'none';
-        feedbackElement.textContent = `Quiz voltooid! Je eindscore is: ${userScore} / 10`;
+        feedbackElement.textContent = `Quiz voltooid! Uw eindscore is: ${userScore} / 10`;
         scoreElement.textContent = '';
-        nextButton.style.display = 'none';
-        levelSelectionDiv.style.display = 'block';
+        nextButton.style.display = 'none'; // Verberg de "Volgende vraag" knop
+    
+        // Maak een nieuwe knop om terug te gaan naar het startscherm
+        const restartButton = document.createElement('button');
+        restartButton.textContent = 'Terug naar startscherm';
+        restartButton.addEventListener('click', () => {
+            quizContainer.style.display = 'none';
+            levelSelectionDiv.style.display = 'block';
+            currentQuestionIndex = 0;
+            userScore = 0;
+            feedbackElement.textContent = '';
+            scoreElement.textContent = '';
+        });
+    
+        // Voeg de knop toe aan de quiz container
+        quizContainer.appendChild(restartButton);
     }
 
     function shuffleArray(array) {
