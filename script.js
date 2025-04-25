@@ -97,9 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentQuestion && currentQuestion.images && currentQuestion.images.length > 0) {
             console.log("currentQuestion.images.length > 0 is true");
             const randomImage = currentQuestion.images[Math.floor(Math.random() * currentQuestion.images.length)];
-            // Stel hier de basis URL van je submap in
             const baseUrl = window.location.origin + '/moths_test/';
-            quizImage.src = baseUrl + randomImage; // Gebruik het volledige pad uit de JSON
+            let imagePath = '';
+            if (randomImage.startsWith('images/')) {
+                imagePath = baseUrl + randomImage;
+            } else {
+                imagePath = baseUrl + 'images/' + randomImage;
+            }
+            quizImage.src = imagePath;
             console.log("quizImage.src na instellen:", quizImage.src);
             quizImage.alt = currentQuestion.labels[0];
         } else {
@@ -116,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         feedbackElement.textContent = '';
         nextButton.style.display = 'none';
     }
-
+    
     function generateOptions(correctItem, availableItems) {
         const options = new Set();
         options.add(correctItem.labels[0]);
