@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         options.forEach(optionText => {
             const button = document.createElement('button');
             button.textContent = optionText;
-            //button.addEventListener('click', () => checkAnswer(optionText));
+            button.addEventListener('click', () => checkAnswer(optionText));
             optionsContainer.appendChild(button);
         });
     }
