@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const quizContainer = document.getElementById('quiz-container');
     const quizImage = document.getElementById('quiz-image');
     const optionsContainer = document.getElementById('options-container');
-    const submitButton = document.getElementById('submit-answer');
+    //const submitButton = document.getElementById('submit-answer');
     const feedbackElement = document.getElementById('feedback');
     const scoreElement = document.getElementById('score');
     const nextButton = document.getElementById('next-question');
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         feedbackElement.textContent = '';
         nextButton.style.display = 'none';
     }
-    
+
     function generateOptions(correctItem, availableItems) {
         const options = new Set();
         options.add(correctItem.labels[0]);
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         options.forEach(optionText => {
             const button = document.createElement('button');
             button.textContent = optionText;
-            button.addEventListener('click', () => checkAnswer(optionText));
+            //button.addEventListener('click', () => checkAnswer(optionText));
             optionsContainer.appendChild(button);
         });
     }
