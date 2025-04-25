@@ -70,10 +70,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         levelSelectionDiv.style.display = 'none';
         quizContainer.style.display = 'block';
-        console.log("Quiz container display:", quizContainer.style.display); // Debugging
+        console.log("Quiz container display:", quizContainer.style.display);
         currentQuestionIndex = 0;
         userScore = 0;
-        console.log("loadQuestion functie uitgevoerd"); // Debugging
+        feedbackElement.textContent = ''; // Reset feedback
+        scoreElement.textContent = '';    // Reset score
+
+        // Verwijder eventueel de "Terug naar startscherm" knop als deze nog aanwezig is
+        const existingRestartButton = quizContainer.querySelector('button:not(#next-question)');
+        if (existingRestartButton) {
+            quizContainer.removeChild(existingRestartButton);
+        }
+
+        console.log("loadQuestion functie uitgevoerd");
         loadQuestion();
     }
 
@@ -163,9 +172,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showScore() {
-        quizContainer.style.display = 'block'; // Zorg ervoor dat de quiz container zichtbaar is
-        quizImage.style.display = 'none';       // Verberg de afbeelding
-        optionsContainer.innerHTML = '';      // Leeg de opties
+        quizContainer.style.display = 'block';
+        quizImage.style.display = 'none';
+        optionsContainer.innerHTML = '';
         feedbackElement.textContent = `Quiz voltooid! Uw eindscore is: ${userScore} / 10`;
         scoreElement.textContent = '';
         nextButton.style.display = 'none';
@@ -179,7 +188,11 @@ document.addEventListener('DOMContentLoaded', () => {
             userScore = 0;
             feedbackElement.textContent = '';
             scoreElement.textContent = '';
-            quizImage.style.display = 'block'; // Toon de afbeelding container weer voor de volgende quiz
+            quizImage.style.display = 'block';
+            // Verwijder de knop weer wanneer we teruggaan naar het startscherm (redundant, maar veilig)
+            if (quizContainer.contains(restartButton)) {
+                quizContainer.removeChild(restartButton);
+            }
         });
         quizContainer.appendChild(restartButton);
     }
