@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
         const availableItems = [...currentLevelItems];
         const correctItem = availableItems[Math.floor(Math.random() * availableItems.length)];
-        currentQuestion = correctItem; // Zorg ervoor dat currentQuestion hier als eerste wordt ingesteld
+        currentQuestion = correctItem;
         console.log("Huidige vraag:", currentQuestion);
         console.log("Net voor instellen afbeelding:", currentQuestion);
     
@@ -97,7 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentQuestion && currentQuestion.images && currentQuestion.images.length > 0) {
             console.log("currentQuestion.images.length > 0 is true");
             const randomImage = currentQuestion.images[Math.floor(Math.random() * currentQuestion.images.length)];
-            quizImage.src = `${window.location.origin}/${randomImage}`;
+            // Stel hier de basis URL van je submap in
+            const baseUrl = window.location.origin + '/moths_test/';
+            quizImage.src = baseUrl + randomImage;
             console.log("quizImage.src na instellen:", quizImage.src);
             quizImage.alt = currentQuestion.labels[0];
         } else {
