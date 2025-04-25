@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const randomImage = currentQuestion.images[Math.floor(Math.random() * currentQuestion.images.length)];
             // Stel hier de basis URL van je submap in
             const baseUrl = window.location.origin + '/moths_test/';
-            quizImage.src = baseUrl + randomImage;
+            quizImage.src = baseUrl + randomImage; // Gebruik het volledige pad uit de JSON
             console.log("quizImage.src na instellen:", quizImage.src);
             quizImage.alt = currentQuestion.labels[0];
         } else {
