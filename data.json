@@ -3,31 +3,31 @@
     {
       "id": "item1",
       "labels": ["Zwartkamdwergspanner"],
-      "images": ["images/zwartkam1.jpg", "images/zwartkam2.jpg", "images/zwartkam3.jpg"],
+      "images": ["zwartkam1.jpg", "zwartkam2.jpg", "zwartkam3.jpg"],
       "level": 1
     },
     {
       "id": "item2",
       "labels": ["Voorjaarsdwergspanner"],
-      "images": ["images/voorjaars1.jpg", "images/voorjaars2.jpg"],
+      "images": ["voorjaars1.jpg", "voorjaars2.jpg"],
       "level": 1
     },
     {
       "id": "item3",
       "labels": ["Eikendwergspanner"],
-      "images": ["images/eiken1.jpg", "images/eiken2.jpg", "images/eiken3.jpg"],
+      "images": ["eiken1.jpg", "eiken2.jpg", "eiken3.jpg"],
       "level": 1
     },
     {
       "id": "item4",
       "labels": ["Fijnspardwergspanner"],
-      "images": ["images/fijnspar1.jpg", "images/fijnspar2.jpg"],
+      "images": ["fijnspar1.jpg", "fijnspar2.jpg"],
       "level": 1
     },
     {
       "id": "item5",
       "labels": ["Gewone dwergspanner"],
-      "images": ["images/gewone1.jpg", "images/gewone2.jpg"],
+      "images": ["gewone1.jpg", "gewone2.jpg"],
       "level": 1
     },
     {
