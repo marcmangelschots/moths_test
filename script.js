@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentQuestion && currentQuestion.images && currentQuestion.images.length > 0) {
             console.log("currentQuestion.images.length > 0 is true");
             const randomImage = currentQuestion.images[Math.floor(Math.random() * currentQuestion.images.length)];
-            quizImage.src = randomImage;
+            quizImage.src = `${window.location.origin}/${randomImage}`;
             console.log("quizImage.src na instellen:", quizImage.src);
             quizImage.alt = currentQuestion.labels[0];
         } else {
