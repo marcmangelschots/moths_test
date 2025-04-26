@@ -59,6 +59,36 @@
       "labels": ["v-dwergspanner"],
       "images": ["Item10-1.jpg", "Item10-2.jpg", "Item10-3.jpg"],
       "level": 2
+    },
+    {
+      "id": "item11",
+      "labels": ["Grijze dwergspanner"],
+      "images": ["Item10-1.jpg", "Item10-2.jpg", "Item10-3.jpg"],
+      "level": 3
+    },
+    {
+      "id": "item12",
+      "labels": ["Sleedoorndwergspanner"],
+      "images": ["Item10-1.jpg", "Item10-2.jpg", "Item10-3.jpg"],
+      "level": 3
+    },
+    {
+      "id": "item13",
+      "labels": ["Smalvleugeldwergspanner"],
+      "images": ["Item10-1.jpg", "Item10-2.jpg", "Item10-3.jpg"],
+      "level": 3
+    },
+    {
+      "id": "item14",
+      "labels": ["Egale dwergspanner"],
+      "images": ["Item10-1.jpg", "Item10-2.jpg", "Item10-3.jpg"],
+      "level": 3
+    },
+    {
+      "id": "item15",
+      "labels": ["Groene dwergspanner"],
+      "images": ["Item10-1.jpg", "Item10-2.jpg", "Item10-3.jpg"],
+      "level": 3
     }
     ],
   "levels": [
