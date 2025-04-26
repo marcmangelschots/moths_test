@@ -63,31 +63,31 @@
     {
       "id": "item11",
       "labels": ["Grijze dwergspanner"],
-      "images": ["Item10-1.jpg", "Item10-2.jpg", "Item10-3.jpg"],
+      "images": ["Item11-1.jpg", "Item11-2.jpg", "Item11-3.jpg"],
       "level": 3
     },
     {
       "id": "item12",
       "labels": ["Sleedoorndwergspanner"],
-      "images": ["Item10-1.jpg", "Item10-2.jpg", "Item10-3.jpg"],
+      "images": ["Item12-1.jpg", "Item12-2.jpg", "Item12-3.jpg"],
       "level": 3
     },
     {
       "id": "item13",
       "labels": ["Smalvleugeldwergspanner"],
-      "images": ["Item10-1.jpg", "Item10-2.jpg", "Item10-3.jpg"],
+      "images": ["Item13-1.jpg", "Item13-2.jpg", "Item13-3.jpg"],
       "level": 3
     },
     {
       "id": "item14",
       "labels": ["Egale dwergspanner"],
-      "images": ["Item10-1.jpg", "Item10-2.jpg", "Item10-3.jpg"],
+      "images": ["Item14-1.jpg", "Item14-2.jpg", "Item14-3.jpg"],
       "level": 3
     },
     {
       "id": "item15",
       "labels": ["Groene dwergspanner"],
-      "images": ["Item10-1.jpg", "Item10-2.jpg", "Item10-3.jpg"],
+      "images": ["Item15-1.jpg", "Item15-2.jpg", "Item15-3.jpg"],
       "level": 3
     }
     ],
