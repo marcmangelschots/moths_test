@@ -2,91 +2,91 @@
   "items": [
     {
       "id": "item1",
-      "labels": ["Zwartkamdwergspanner"],
+      "labels": ["Zwartkamdwergspanner - Gymnoscelis rufifasciata"],
       "images": ["Item1-1.jpg", "Item1-2.jpg", "Item1-3.jpg"],
       "level": 1
     },
     {
       "id": "item2",
-      "labels": ["Voorjaarsdwergspanner"],
+      "labels": ["Voorjaarsdwergspanner - Eupithecia abbreviata"],
       "images": ["Item2-1.jpg", "Item2-2.jpg", "Item2-3.jpg", "Item2-4.jpg", "Item2-5.jpg"],
       "level": 1
     },
     {
       "id": "item3",
-      "labels": ["Eikendwergspanner"],
+      "labels": ["Eikendwergspanner - Eupithecia dodoneata "],
       "images": ["Item3-1.jpg", "Item3-2.jpg", "Item3-3.jpg"],
       "level": 1
     },
     {
       "id": "item4",
-      "labels": ["Fijnspardwergspanner"],
+      "labels": ["Fijnspardwergspanner - Eupithecia tantillaria"],
       "images": ["Item4-1.jpg", "Item4-2.jpg", "Item4-3.jpg"],
       "level": 1
     },
     {
       "id": "item5",
-      "labels": ["Gewone dwergspanner"],
+      "labels": ["Gewone dwergspanner - Eupithecia vulgata"],
       "images": ["Item5-1.jpg", "Item5-2.jpg", "Item5-3.jpg"],
       "level": 1
     },
     {
       "id": "item6",
-      "labels": ["Streepjesdwergspanner"],
+      "labels": ["Streepjesdwergspanner - Eupithecia intricata"],
       "images": ["Item6-1.jpg", "Item6-2.jpg", "Item6-3.jpg", "Item6-4.jpg"],
       "level": 2
     },
     {
       "id": "item7",
-      "labels": ["Schermbloemdwergspanner"],
+      "labels": ["Schermbloemdwergspanner - Eupithecia tripunctaria"],
       "images": ["Item7-1.jpg", "Item7-2.jpg", "Item7-3.jpg", "Item7-4.jpg"],
       "level": 2
     },
     {
       "id": "item8",
-      "labels": ["Guldenroededwergspanner"],
+      "labels": ["Guldenroededwergspanner - Eupithecia virgaureata"],
       "images": ["Item8-1.jpg", "Item8-2.jpg", "Item8-3.jpg", "Item8-4.jpg"],
       "level": 2
     },
     {
       "id": "item9",
-      "labels": ["Vlasbekdwergspanner"],
+      "labels": ["Vlasbekdwergspanner - Eupithecia linariata"],
       "images": ["Item9-1.jpg", "Item9-2.jpg", "Item9-3.jpg", "Item9-4.jpg"],
       "level": 2
     },
     {
       "id": "item10",
-      "labels": ["v-dwergspanner"],
+      "labels": ["v-dwergspanner - Chloroclystis v-ata"],
       "images": ["Item10-1.jpg", "Item10-2.jpg", "Item10-3.jpg"],
       "level": 2
     },
     {
       "id": "item11",
-      "labels": ["Grijze dwergspanner"],
+      "labels": ["Grijze dwergspanner - Eupithecia subfuscata"],
       "images": ["Item11-1.jpg", "Item11-2.jpg", "Item11-3.jpg", "Item11-4.jpg"],
       "level": 3
     },
     {
       "id": "item12",
-      "labels": ["Sleedoorndwergspanner"],
+      "labels": ["Sleedoorndwergspanner - Pasiphila chloerata"],
       "images": ["Item12-1.jpg", "Item12-2.jpg", "Item12-3.jpg"],
       "level": 3
     },
     {
       "id": "item13",
-      "labels": ["Smalvleugeldwergspanner"],
+      "labels": ["Smalvleugeldwergspanner - Eupithecia nanata"],
       "images": ["Item13-1.jpg", "Item13-2.jpg", "Item13-3.jpg", "Item13-4.jpg"],
       "level": 3
     },
     {
       "id": "item14",
-      "labels": ["Egale dwergspanner"],
+      "labels": ["Egale dwergspanner - Eupithecia absinthiata"],
       "images": ["Item14-1.jpg", "Item14-2.jpg"],
       "level": 3
     },
     {
       "id": "item15",
-      "labels": ["Groene dwergspanner"],
+      "labels": ["Groene dwergspanner - Pasiphila rectangulata"],
       "images": ["Item15-1.jpg", "Item15-2.jpg", "Item15-3.jpg"],
       "level": 3
     }
