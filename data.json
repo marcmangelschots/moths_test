@@ -89,6 +89,36 @@
       "labels": ["Groene dwergspanner - Pasiphila rectangulata"],
       "images": ["Item15-1.jpg", "Item15-2.jpg", "Item15-3.jpg"],
       "level": 3
+    },
+    {
+      "id": "item16",
+      "labels": ["Zwartvlekdwergspanner - Eupithecia centaureata"],
+      "images": ["Item16-1.jpg", "Item16-2.jpg"],
+      "level": 4
+    },
+    {
+      "id": "item17",
+      "labels": ["Witvlakdwergspanner - Eupithecia succenturiata"],
+      "images": ["Item17-1.jpg", "Item17-2.jpg"],
+      "level": 4
+    },
+    {
+      "id": "item18",
+      "labels": ["Valeriaandwergspanner - Eupithecia valerianata"],
+      "images": ["Item18-1.jpg", "Item18-2.jpg"],
+      "level": 4
+    },
+    {
+      "id": "item19",
+      "labels": ["Hengeldwergspanner - Eupithecia plumbeolata"],
+      "images": ["Item19-1.jpg", "Item19-2.jpg"],
+      "level": 4
+    },
+    {
+      "id": "item20",
+      "labels": ["Heidedwergspanner - Eupithecia satyrata"],
+      "images": ["Item20-1.jpg", "Item20-2.jpg"],
+      "level": 4
     }
     ],
   "levels": [
